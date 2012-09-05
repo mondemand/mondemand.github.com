@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>MonDemand</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="mondemand,monitoring,instrumentation"/>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+  </head>
+
+<body>
+  <div id="main">
+
+    <div id="topmenu">
+      <a href="/">introduction</a><a href="/docs.html">documentation</a><a href="/download.html">download</a><a href="/contact.html">contact</a>
+    </div>
+
+    <div id="header">
+      <span class="title">Mon<span class="darktitle">Demand</span></span><br/>
+    </div>
+
+  <div id="lefty">
+    <div class="menu">
+      <a href="#Introduction">Event Types</a>
+      <a href="#Java">Java Example</a>
+      <a href="#C">C Example</a>
+    </div>
+  </div>
+  
+  <div id="righty">
+	<h3>Useful Links</h3>
+    <div class="menu">
+      <a href="/docs/doxygen">C API Documentation</a>
+      <a href="/docs/javadoc">Java API Documentation</a>
+      <a href="http://mondemand.svn.sourceforge.net/viewvc/mondemand/">Source Code</a>
+    </div>
+    <br/>
+	<div>
+	<h3>Contributors</h3>
+        <a href="http://www.yahoo.com"><img src="/images/yahoo.jpg" border="0" width="100"></a><p/>
+	<a href="http://www.openx.org"><img src="/images/openx.jpg" border="0"></a>
+	</div>
+  </div>
+  
+    <div id="content">
+	  <a name="Introduction"><h1>Event Types</h1></a>
+There are two basic types of events in MonDemand - log events and stats events.  Log events are
+text messages that represent something that has happened, stats events represent the numerical
+state of an thread of control.  Most applications provide a logging framework such as log4j that can be re-used for log events, however stats events are usually created from within the application.
+<p/>
+There is a third type of event that can be used to track workflow that is under development.
+
+	  <a name="Java"><h1>Java Example</h1></a>
+
+      <div id="block">
+<pre>
+import java.net.InetAddress;
+import org.mondemand.Client;
+import org.mondemand.Transport;
+
+public class MyApp {
+  private static Client client = null;
+		
+  public static void main(String[] args) {
+    // or could be implemented as singleton if desired
+    client = new Client("MyApp");
+	
+    // setup the transport.  this also only needs to be done once, not per request
+    try {
+      Transport transport = new LWESTransport(InetAddress.getByName("224.1.11.111"),
+                                              9191, null);
+      client.addTransport(transport);
+    } catch(Exception e) {}
+	
+    // set some optional persistent contexts
+    client.addContext("clusterID", "101");
+    client.addContext("partitionID", "202");
+	
+    /* typically everything below this line would be done in the main event loop */
+	
+    // log some messages
+    client.emerg("Emergency!");
+	
+    // log some stats
+    client.setKey("responseTime", 101);
+    client.increment("counter");
+	
+    // flush the messages to the network
+    client.flush()
+  }
+}
+</pre>
+	  </div>
+
+		  <a name="C"><h1>C Example</h1></a>
+
+	      <div id="block">
+	<pre>
+#include "mondemand.h"
+
+int
+main(void)
+{
+  struct mondemand_client *client = NULL;
+  struct mondemand_transport *transport = NULL;
+
+  // create the client
+  client = mondemand_client_create("my_application");
+  
+  // create a transport to send data
+  transport = mondemand_transport_lwes_create("224.1.11.111", 9191, NULL, 0, 60);
+
+  // attach the transport to the client
+  mondemand_add_transport(client, transport);
+
+  // add some contextual information to the client
+  mondemand_set_context(client, "cluster_id", "123");
+
+  // log some messages
+  mondemand_info(client, MONDEMAND_NULL_TRACE_ID, "Hello! I am %s", "123");
+  
+  // log some stats
+  mondemand_set_key_by_val(client, "stat_1", 1234);
+  mondemand_increment_key(client, "stat_2");
+
+  // send it to the network
+  mondemand_flush(client);
+
+  return 0;
+}
+	</pre>
+		</div>
+
+      <div id="footer">
+       &copy; 2009 MonDemand
+      </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>
