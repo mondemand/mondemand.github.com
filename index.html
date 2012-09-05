@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>MonDemand</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="mondemand,monitoring,instrumentation"/>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+  </head>
+
+<body>
+  <div id="main">
+
+    <div id="topmenu">
+      <a href="/">introduction</a><a href="/docs.html">documentation</a><a href="/download.html">download</a><a href="/contact.html">contact</a>
+    </div>
+
+    <div id="header">
+      <span class="title">Mon<span class="darktitle">Demand</span></span><br/>
+    </div>
+
+  <div id="lefty">
+    <div class="menu">
+      <a href="#Introduction">Introduction</a>
+      <a href="#Features">Features</a>
+      <a href="#UseCases">Use Cases</a>
+    </div>
+  </div>
+  
+  <div id="righty">
+	<h3>Useful Links</h3>
+    <div class="menu">
+      <a href="http://www.sourceforge.net/projects/mondemand">SourceForge Project Page</a>
+      <a href="http://sourceforge.net/project/showfiles.php?group_id=259004">Downloads</a>
+      <a href="http://mondemand.svn.sourceforge.net/viewvc/mondemand/">Source Code</a>
+    </div>
+    <br/>
+	<div>
+	<h3>Contributors</h3>
+        <a href="http://www.yahoo.com"><img src="/images/yahoo.jpg" border="0" width="100"></a><p/>
+	<a href="http://www.openx.org"><img src="/images/openx.jpg" border="0"></a>
+	</div>
+  </div>
+  
+    <div id="content">
+	  <a name="Introduction"><h1>Introduction</h1></a>
+MonDemand is an open source library that is used to log messages and statistics in order to monitor
+real-time metrics and events in applications.  As opposed to many full-featured profiling systems,
+it is designed to be run in production, with a minimal impact on performance.  By default,
+MonDemand uses the <a href="http://www.lwes.org">Light Weight Event System</a> in order to 
+log events to the network; however, developers can easily add additional transports to 
+MonDemand to use the protocol of their choice.
+<p/>
+
+	  <a name="Features"><h1>Features</h1></a>
+
+When using the default network transport, MonDemand inherits the design features of the
+<a href="http://www.lwes.org">Light Weight Event System</a> - non-blocking, best-effort delivery
+of monitoring events.  This ensures that applications are not blocked with monitoring calls.  Also,
+if logging events remotely, it provides a way to offload the processing of monitoring events to
+other machines.
+	
+	  <a name="UseCases"><h1>Use Cases</h1></a>
+The stream of events coming from applications using MonDemand are useful for a variety of purposes:
+	<ul class="bullet">
+		<li><b>Real-time performance monitoring</b> - using the MonDemand listener, events can
+			be processed in real-time to display summaries and graphs, or the data can be fed into
+			monitoring systems such as Nagios.</li>
+		<li><b>Performance Analysis</b> - MonDemand events can be warehoused and aggregated on batch processing systems such as <a href="http://hadoop.apache.org">Hadoop</a>.</li>
+		<li><b>Alerts</b> - error conditions can be detected and trigger notifications using a script or existing notification and monitoring system.</li>
+		<li><b>Forensics</b> - the MonDemand trace facility provides a way to enable debug logging for a single transaction, which makes it easier to troubleshoot specific runtime errors without the need to enable verbose logging globally.</li>
+
+
+      <div id="footer">
+       &copy; 2009 MonDemand
+      </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>
