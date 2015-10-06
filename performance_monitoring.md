@@ -27,12 +27,12 @@ Each client library should then support the following changes.
 ```
    # an ip or list of ips to emit performance events to, when more than
    # one ip is listed the client should round robin the sending of events
-   MONDEMAND_PERF_ADDRS="<ip>[,<ip>]?"
+   MONDEMAND_PERF_ADDR="<ip>[,<ip>]?"
    # a port or list of ports to emit performance events to.  If multiple ips
    # are given, but only a single port given, then each ip should use that
    # port.  If more than one port is given the total number should match the
    # total number of ips
-   MONDEMAND_PERF_PORTS="<port>[,<port>]?"
+   MONDEMAND_PERF_PORT="<port>[,<port>]?"
    # The TTL field is an optional field which is only necessary if multicast
    # ips are being used and it is necessary to use a different value than the
    # default of 5.
@@ -43,7 +43,13 @@ Each client library should then support the following changes.
    #
    # If more than one ttl is given the total number should match the
    # total number of ips
-   MONDEMAND_PERF_TTLS="<ttl>[,<ttl>]?"
+   MONDEMAND_PERF_TTL="<ttl>[,<ttl>]?"
+   # the SENDTO field is an optional field only really pertinent if you include
+   # several ADDR's in the ADDR field.  If SENDTO is not set, then all ADDR's in
+   # the ADDR field should be sent the event, if SENDTO is set to an integer less
+   # than the number of ADDR's in the ADDR field, then each event is sent to that
+   # number
+   MONDEMAND_PERF_SENDTO="<sendto>"
 ```
    language specific client libraries may also allow for these to be
    specified in a language specific form but libraries which support
