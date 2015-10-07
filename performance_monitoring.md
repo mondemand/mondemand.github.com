@@ -10,13 +10,20 @@ MonDemand::PerfMsg
   # and will consist of a set of keys separated by ':' characters
   string id;
 
+  # the number of timings set for the rest of the event
+  uint16 num;
   # the next three fields should all be set together and keep track of
   # the component (and optionally sub-components) by adding a label for
   # the component as well as a start and stop time as milliseconds since
   # epoch.  All three fields should be set together
-  string label[];
-  int64  start[];
-  int64  end[];
+  string label0;
+  int64  start0;
+  int64  end0;
+  # ...
+  string label20;
+  int64  start20;
+  int64  end20;
+  # etc.
 }
 ```
 
