@@ -6,10 +6,19 @@ will be added to MonDemand.  The ESF for the event is as follows.
 ```
 MonDemand::PerfMsg
 {
-  # this first field is assigned at the head of the performance trace
-  # and will consist of a set of keys separated by ':' characters
+  # this first field is assigned at the beginning of the performance trace
+  # and will consist of a unique value for the given performance trace
   string id;
-
+  
+  # the label of the caller, used to give a directed graph of performance timings
+  string caller_label;
+  
+  # number of contextual key/value dimensions
+  uint16 ctxt_num;
+  string ctxt_k0;    # name of contextual metadata
+  string ctxt_v0;    # value of contextual metadata
+  # repeated for the number of contextual key/value pairs
+  
   # the number of timings set for the rest of the event
   uint16 num;
   # the next three fields should all be set together and keep track of
@@ -23,7 +32,7 @@ MonDemand::PerfMsg
   string label20;
   int64  start20;
   int64  end20;
-  # etc.
+  # repeated for the number of timings
 }
 ```
 
