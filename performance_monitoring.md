@@ -73,7 +73,7 @@ Each client library should then support the following changes.
 
 2. a function of the form
 ```
-send_performance_trace (id, label[], start[], end[])
+send_performance_trace (id, caller_label, label[], start[], end[], context)
 ```
    (with the details of the arguments left to the developer) which immediately
    send a performance event with the given information.
