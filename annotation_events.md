@@ -40,13 +40,15 @@ Eventually all libraries should support the sending of these events, although th
 
 Mondemand-tool should support the following command line for annotations
 
-> Annotations Options:
->
->   -a [id]:[timestamp]:[desc](:[tag1],[tag2])
->   -at [text]
->
->   The [desc] and [tagN] values should not contain a ':' and the [tagN] values should not contain a ','.
->   The [text] field is left separate such that longer values with any characters can be used.
+```
+Annotations Options:
+
+  -a [id]:[timestamp]:[desc](:[tag1],[tag2]) 
+  -A [text]
+  
+  The [desc] and [tagN] values should not contain a ':' and the [tagN] values should not contain a ','.
+  The [text] field is left separate such that longer values with any characters can be used.
+```
 
 Contexts are set as with other fields via the '-c' command line switch.
 
