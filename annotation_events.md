@@ -14,7 +14,7 @@ MonDemand::AnnotationMsg
   int64 timestamp;
   
   # a short description of the event
-  string desc;
+  string description;
   
   # any longer details about the event
   string text;
